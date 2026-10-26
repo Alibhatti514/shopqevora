@@ -1,0 +1,36 @@
+@inherits LayoutComponentBase
+@implements IAsyncDisposable
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+<a class="skip-link" href="#main" @onclick="SkipToContent" @onclick:preventDefault>Skip to content</a><div class="announcement">Good things for your everyday. Discover the new collection. <span aria-hidden="true">↗</span></div>
+<header class="topbar"><nav class="nav shell" aria-label="Main navigation">
+<a class="brand" href="/" aria-label="ShopQevora home"><img src="/logo.svg?v=4" alt="ShopQevora" width="190" height="44"/></a>
+<div class="primary-links"><a href="/#collection" @onclick="BrowseAll">Shop</a><a href="/#collections">Categories</a></div>
+<div class="nav-actions"><a href="/#search" aria-label="Search products" class="nav-search"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5"/></svg></a><a class="persistent-cart" href="/cart" aria-label="Shopping cart, @Shop.CartCount items"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg> Cart <span class="cart-count">@Shop.CartCount</span></a><button @ref="menuButton" class="text-button drawer-toggle" aria-label="Open menu" aria-expanded="@open.ToString().ToLower()" aria-controls="navigation" @onclick="OpenMenu">☰</button></div>
+</nav></header>
+@if(open){
+<div class="drawer-backdrop" @onclick="Close"></div>
+<aside @ref="drawerElement" id="navigation" class="account-drawer" role="dialog" aria-modal="true" aria-label="ShopQevora menu" @onkeydown="Key">
+<div class="drawer-heading"><span class="eyebrow">YOUR SHOPQEVORA</span><button class="text-button" aria-label="Close menu" @onclick="Close">Close ×</button></div>
+<div class="drawer-group"><h2>Account</h2>@if(Shop.LoggedIn){<a href="/account" @onclick="Close">My Profile</a><a href="/account/edit" @onclick="Close">Edit Profile</a><a href="/orders" @onclick="Close">My Orders</a><a href="/account/settings" @onclick="Close">Account Settings</a><button class="text-button" @onclick="SignOut">Sign Out</button>}else{<a href="/login" @onclick="Close">Sign In</a><a href="/register" @onclick="Close">Create Account</a><a href="/#collection" @onclick="Close">Continue Shopping as Guest</a>}</div>
+<div class="drawer-group"><h2>Shopping</h2><a href="/#collection" @onclick="BrowseAll">Shop All</a><a href="/#new-arrivals" @onclick="Close">New Arrivals</a><a href="/#collections" @onclick="Close">Collections &amp; Categories</a><a href="/#favorites" @onclick="Close">Favorites · curated edit</a><a href="/#favorites" @onclick="Close">Best Sellers · curated demo</a></div>
+<div class="drawer-group"><h2>Help &amp; Support</h2>@foreach(var item in InformationPages.Links){<a href="@(item.Key=="contact"?"/contact":"/information/"+item.Key)" @onclick="Close">@item.Value.Title</a>}</div>
+</aside>}
+<div @ref="motionRoot" class="motion-root"><main @ref="mainContent" id="main" tabindex="-1">@Body</main><footer class="footer"><div class="shell footer-grid"><div><a href="/" class="brand"><img src="/logo-light.svg?v=4" alt="ShopQevora" width="190" height="44"/></a><p>Considered essentials.<br/>A little more ease, every day.</p></div><div><h2>Discover</h2><a href="/#collection">Shop the collection</a><a href="/#collections">Explore categories</a><a href="/#story">Our point of view</a></div><div><h2>Your ShopQevora</h2><a href="/cart">Your bag</a><a href="/orders">Your orders</a><a href="/register">Create an account</a></div><div><h2>A considered project</h2><p>A Blazor & MySQL capstone.<br/>Demo store. No real payments,<br/>shipping, or product fulfillment.</p><a href="/contact">Contact Us</a></div></div><div class="shell footer-bottom"><span>© @DateTime.Now.Year ShopQevora</span><span>Good things. Everyday.</span></div></footer></div>
+@code {
+ ElementReference mainContent,motionRoot,menuButton,drawerElement; IJSObjectReference? motion,drawer; bool disposed,open,attachDrawer;
+ async Task SkipToContent()=>await mainContent.FocusAsync();
+ async Task BrowseAll(){Shop.BrowseAll();await Close();}
+ void OpenMenu(){open=true;attachDrawer=true;}
+ async Task Close(){open=false;if(drawer is not null)await drawer.InvokeVoidAsync("close");}
+ async Task Key(KeyboardEventArgs e){if(e.Key=="Escape")await Close();}
+ protected override async Task OnAfterRenderAsync(bool first){
+  if(first){Shop.Changed+=Refresh;Nav.LocationChanged+=LocationChanged;drawer=await JS.InvokeAsync<IJSObjectReference>("import","./js/drawer.js");try{await Shop.Initialize();motion=await JS.InvokeAsync<IJSObjectReference>("import","./js/scroll-motion.js");if(!disposed)await motion.InvokeVoidAsync("attach",motionRoot);}catch{}}
+  if(attachDrawer&&drawer is not null){attachDrawer=false;await drawer.InvokeVoidAsync("open",drawerElement,menuButton);}
+ }
+ void LocationChanged(object? sender,Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)=>_ = InvokeAsync(async()=>{await Close();StateHasChanged();});
+ void Refresh()=>_ = InvokeAsync(StateHasChanged);
+ async Task SignOut(){await Close();await Shop.Logout();Nav.NavigateTo("/");}
+ public async ValueTask DisposeAsync(){disposed=true;Shop.Changed-=Refresh;Nav.LocationChanged-=LocationChanged;if(drawer is not null){await drawer.InvokeVoidAsync("close");await drawer.DisposeAsync();}if(motion is not null){try{await motion.InvokeVoidAsync("detach",motionRoot);await motion.DisposeAsync();}catch(JSDisconnectedException){}}}
+}

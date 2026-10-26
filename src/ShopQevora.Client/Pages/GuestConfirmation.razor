@@ -1,0 +1,11 @@
+@page "/guest-confirmation"
+<PageTitle>Your guest order — ShopQevora</PageTitle>
+<section class="shell page guest-confirmation">
+@if(Shop.GuestConfirmation is not {} receipt){<div class="empty"><h1>Your order details stay private.</h1><p>Confirmation details are held only in this page session and are unavailable after a refresh. If you placed an order, keep its private reference. No payment was taken.</p><a class="button button-primary" href="/#collection">Back to the collection</a></div>}
+else{
+ <div class="confirmation" role="status"><span class="eyebrow">THANK YOU FOR SHOPPING SHOPQEVORA</span><h1>A little more good, on record.</h1><p>Your guest demo order is confirmed. No payment was taken and no items will be shipped.</p><strong class="order-reference">@receipt.Reference</strong><p>Keep this reference before leaving. We do not provide public order lookup or send confirmation emails.</p></div>
+ <div class="checkout-layout"><div class="checkout-card"><h2>Your considered selection.</h2>@foreach(var line in receipt.Lines){<div class="summary-line"><span>@line.ProductName<br/><small>@line.Quantity × @Money(line.UnitPrice)</small></span><strong>@Money(line.UnitPrice*line.Quantity)</strong></div>}<div class="summary-line"><strong>Total · USD</strong><strong>@Money(receipt.Total)</strong></div><p>@receipt.PaymentStatus</p><a class="button button-primary" href="/#collection">Keep exploring ↗</a></div><aside class="summary"><h2>Delivery information.</h2><address>@receipt.Contact.FullName<br/>@receipt.Contact.Address<br/>@receipt.Contact.City, @receipt.Contact.Region @receipt.Contact.PostalCode<br/>Pakistan<br/>@receipt.Contact.Phone<br/>@receipt.Contact.Email</address><p>@receipt.Status</p><p>Contact details were saved with the demo order in MySQL and are not retained in browser storage.</p></aside></div>
+ @if(Shop.Message!=""){<p class="notice" role="status">@Shop.Message</p>}
+}
+</section>
+@code{static string Money(decimal amount)=>amount.ToString("C",System.Globalization.CultureInfo.GetCultureInfo("en-US"));}

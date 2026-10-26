@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Studio Headphones",
+    "file": "/images/products/headphones.webp",
+    "alt": "Forest green over-ear headphones with ivory ear cushions"
+  },
+  {
+    "name": "Minimal Desk Lamp",
+    "file": "/images/products/lamp.webp",
+    "alt": "Minimal gray metal task lamp with an angled shade"
+  },
+  {
+    "name": "Everyday Backpack",
+    "file": "/images/products/backpack.webp",
+    "alt": "Olive canvas backpack with a front zip pocket"
+  },
+  {
+    "name": "Smart Watch",
+    "file": "/images/products/watch.webp",
+    "alt": "Forest green smart watch with a circular dark face and fabric strap"
+  },
+  {
+    "name": "Ceramic Coffee Cup",
+    "file": "/images/products/cup.webp",
+    "alt": "Speckled ivory ceramic mug with a curved handle"
+  },
+  {
+    "name": "Canvas Sneakers",
+    "file": "/images/products/shoes.webp",
+    "alt": "Off-white canvas sneakers with cream rubber soles"
+  },
+  {
+    "name": "Pocket Sound Speaker",
+    "file": "/images/products/speaker.webp",
+    "alt": "Charcoal woven portable speaker without branding"
+  },
+  {
+    "name": "Sculpture Ceramic Vase",
+    "file": "/images/products/vase.webp",
+    "alt": "Sculptural ivory ceramic vase with a curved silhouette"
+  },
+  {
+    "name": "Evening Ritual Candle",
+    "file": "/images/products/candle.webp",
+    "alt": "Lit candle in an unbranded frosted ivory glass vessel"
+  },
+  {
+    "name": "Daily Hydration Bottle",
+    "file": "/images/products/bottle.webp",
+    "alt": "Forest green reusable bottle with matching cap"
+  },
+  {
+    "name": "Weekender Travel Organizer",
+    "file": "/images/products/travel.webp",
+    "alt": "Open sand travel pouch with organized compartments"
+  },
+  {
+    "name": "Market Canvas Tote",
+    "file": "/images/products/tote.webp",
+    "alt": "Natural canvas tote with forest green handles"
+  },
+  {
+    "name": "Weekend Sneakers",
+    "file": "/images/products/shoes.webp",
+    "alt": "Minimal off-white everyday canvas sneakers"
+  },
+  {
+    "name": "Everyday Cotton Cap",
+    "file": "/images/products/cap.webp",
+    "alt": "Sand cotton cap with a curved brim"
+  },
+  {
+    "name": "Sunday Sunglasses",
+    "file": "/images/products/sunglasses.webp",
+    "alt": "Tortoiseshell sunglasses with green lenses and rounded frames"
+  },
+  {
+    "name": "Slow Morning Hoodie",
+    "file": "/images/products/hoodie.webp",
+    "alt": "Oatmeal cotton hoodie laid flat against an ivory surface"
+  },
+  {
+    "name": "Studio Desk Organizer",
+    "file": "/images/products/organizer.webp",
+    "alt": "Walnut desktop organizer with pencils and divided trays"
+  },
+  {
+    "name": "Daily Notes Journal",
+    "file": "/images/products/notebook.webp",
+    "alt": "Closed forest green linen notebook with a ribbon bookmark"
+  },
+  {
+    "name": "Quiet Wireless Keyboard",
+    "file": "/images/products/keyboard.webp",
+    "alt": "Ivory wireless keyboard in a sage body with simple keycaps"
+  },
+  {
+    "name": "Desktop Charging Station",
+    "file": "/images/products/charging.webp",
+    "alt": "Forest green desktop charging dock with phone and watch stands"
+  }
+]

@@ -1,0 +1,96 @@
+@implements IAsyncDisposable
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using Microsoft.JSInterop
+
+<section @ref="root" class="hero-carousel" aria-roledescription="carousel" aria-label="ShopQevora featured collections" @onkeydown="OnKey">
+    <h1 class="sr-only">ShopQevora everyday collections</h1>
+    <div class="hero-slides" aria-live="off">
+        @for (var i = 0; i < HeroContent.Slides.Count; i++)
+        {
+            var slide = HeroContent.Slides[i];
+            <article class="hero-slide @(state.Current == i ? "is-active" : "")" role="group" aria-roledescription="slide" aria-label="@(i + 1) of @HeroContent.Slides.Count" aria-hidden="@(state.Current != i ? "true" : "false")" inert="@(state.Current != i)">
+                <picture>
+                    <source media="(max-width: 640px)" srcset="/images/hero/@(slide.Image)-mobile.webp" />
+                    <img class="hero-background" src="/images/hero/@(slide.Image).webp" alt="@slide.Alt" width="1920" height="1080" fetchpriority="@(i == 0 ? "high" : "low")" decoding="async" />
+                </picture>
+                <div class="hero-shade"></div>
+                <div class="shell hero-content">
+                    <span class="eyebrow">@slide.Eyebrow</span>
+                    <h2>@slide.Title</h2>
+                    <p>@slide.Description</p>
+                    <a class="button hero-cta" href="@(slide.Category == "favorites" ? "#favorites" : "#collection")" @onclick="() => OnCollection.InvokeAsync(slide.Category)">@slide.Button <span aria-hidden="true">↗</span></a>
+                </div>
+            </article>
+        }
+    </div>
+    <div class="shell hero-controls">
+        <div class="hero-pagination" aria-label="Choose a featured slide">
+            @for (var i = 0; i < HeroContent.Slides.Count; i++)
+            {
+                var index = i;
+                <button type="button" disabled="@(!imagesReady)" class="hero-dot @(state.Current == i ? "active" : "")" aria-label="Show slide @(i + 1): @HeroContent.Slides[i].Title" aria-current="@(state.Current == i ? "true" : "false")" @onclick="() => GoTo(index)"><span></span></button>
+            }
+        </div>
+        <div class="hero-navigation">
+            <span class="hero-counter" aria-hidden="true">@(state.Current + 1) / @state.Count</span>
+            <button type="button" class="hero-control" disabled="@(!imagesReady)" aria-label="Previous slide" @onclick="Previous">←</button>
+            <button type="button" class="hero-control" disabled="@(!imagesReady)" aria-label="Next slide" @onclick="Next">→</button>
+            <button type="button" class="hero-control hero-pause" aria-label="@(state.ReducedMotion ? "Autoplay disabled by reduced-motion preference" : state.Paused ? "Resume automatic slides" : "Pause automatic slides")" aria-pressed="@state.Paused" disabled="@state.ReducedMotion" @onclick="TogglePause">@(state.Paused || state.ReducedMotion ? "Play" : "Pause")</button>
+        </div>
+    </div>
+    <span class="sr-only" role="status">@manualAnnouncement</span>
+</section>
+
+@code {
+    [Parameter] public EventCallback<string> OnCollection { get; set; }
+    readonly CarouselState state = new(HeroContent.Slides.Count);
+    ElementReference root;
+    IJSObjectReference? module;
+    DotNetObjectReference<HeroCarousel>? reference;
+    bool disposed, imagesReady;
+    string manualAnnouncement = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender || disposed) return;
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/hero-carousel.js");
+        if (disposed) { await module.DisposeAsync(); return; }
+        reference = DotNetObjectReference.Create(this);
+        await module.InvokeVoidAsync("attach", root, reference, 2000);
+    }
+    [JSInvokable] public Task Advance()
+    {
+        if (!disposed) { state.Tick(); return InvokeAsync(StateHasChanged); }
+        return Task.CompletedTask;
+    }
+    [JSInvokable] public Task ImagesReady()
+    {
+        imagesReady = true;
+        return disposed ? Task.CompletedTask : InvokeAsync(StateHasChanged);
+    }
+    [JSInvokable] public Task MotionChanged(bool reduce)
+    {
+        state.ReducedMotion = reduce;
+        return disposed ? Task.CompletedTask : InvokeAsync(StateHasChanged);
+    }
+    void Announce() => manualAnnouncement = $"Slide {state.Current + 1} of {state.Count}: {HeroContent.Slides[state.Current].Title}";
+    void Next() { state.Next(); Announce(); }
+    void Previous() { state.Previous(); Announce(); }
+    void GoTo(int index) { state.GoTo(index); Announce(); }
+    void OnKey(KeyboardEventArgs e) { if(!imagesReady)return; if (e.Key == "ArrowLeft") Previous(); else if (e.Key == "ArrowRight") Next(); }
+    async Task TogglePause()
+    {
+        state.Paused = !state.Paused;
+        if (module is not null) await module.InvokeVoidAsync("setPaused", root, state.Paused);
+    }
+    public async ValueTask DisposeAsync()
+    {
+        disposed = true;
+        if (module is not null)
+        {
+            try { await module.InvokeVoidAsync("detach", root); await module.DisposeAsync(); }
+            catch (JSDisconnectedException) { }
+        }
+        reference?.Dispose();
+    }
+}

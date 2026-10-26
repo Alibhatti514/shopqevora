@@ -1,0 +1,85 @@
+@page "/contact"
+@page "/information/contact"
+@using Microsoft.AspNetCore.Components.Forms
+@using ShopQevora.Contracts
+<PageTitle>Contact Us — ShopQevora</PageTitle>
+<section class="shell contact-page">
+    <div class="contact-intro"><span class="eyebrow">HELP &amp; SUPPORT</span><h1>Contact Us</h1><p class="contact-lede">A question about your everyday essentials?<br/>Make a little room for clarity.</p></div>
+    <div class="contact-layout">
+        <aside class="contact-context" aria-label="About this contact form">
+            <svg class="contact-symbol" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M13 14h46v34H32L18 59V48h-5V14Z"/><path d="M24 26h24M24 35h16"/><circle cx="55" cy="55" r="7"/></svg>
+            <span class="eyebrow">A NOTE, CONSIDERED</span><h2>Your questions.<br/>A thoughtful starting point.</h2>
+            <p>Use this form to try the contact experience, share a website suggestion, or ask about the demo catalog.</p>
+            <div class="contact-demo" id="contact-demo"><strong>Demonstration form</strong><p>Submissions are saved to this project’s database but are <strong>not actively monitored</strong>. No emails are sent and no response time is promised.</p><p>Use fictional details when testing. Please leave out passwords, payment details, and sensitive personal information.</p></div>
+            <a class="text-link" href="#contact-faq">A little help, right here ↓</a>
+        </aside>
+        <div class="contact-form-surface">
+            @if(receipt is not null)
+            {
+                <section @ref="confirmation" class="contact-confirmation" role="status" aria-live="polite" tabindex="-1" aria-labelledby="contact-saved-title">
+                    <span class="contact-check" aria-hidden="true">✓</span><span class="eyebrow">SAVED TO THE DEMO INBOX</span><h2 id="contact-saved-title">Your note is on record.</h2><p>Your demo inquiry has been saved successfully.</p><p class="contact-reference">@receipt.Reference</p><p>Keep this reference for your testing records. This inbox is not actively monitored. <strong>No email was sent.</strong></p><button class="button button-primary" @onclick="NewInquiry">Send another inquiry</button>
+                </section>
+            }
+            else
+            {
+                <h2>Send a demo inquiry</h2><p class="contact-form-caption">Required fields are marked with an asterisk. Your inquiry stays private; there is no public inbox or reference lookup.</p>
+                @if(loading){<p role="status">Preparing your form…</p>}
+                @if(error!=""){<div class="contact-error" role="alert">@error <button class="text-button" type="button" disabled="@(busy||loading)" @onclick="NewInquiry">Start over (clears fields)</button></div>}
+                <EditForm Model="model" OnValidSubmit="Submit" FormName="contact-inquiry" class="contact-form" aria-describedby="contact-demo">
+                    <DataAnnotationsValidator/><ValidationSummary/>
+                    <fieldset disabled="@(busy||loading||string.IsNullOrEmpty(model.FormToken))">
+                        <legend class="sr-only">Inquiry details</legend>
+                        <div class="contact-fields">
+                            <div><label for="contact-name">Full name <span aria-hidden="true">*</span></label><ContactTextInput id="contact-name" @bind-Value="model.FullName" autocomplete="name" maxlength="120" required aria-required="true"/><ValidationMessage For="()=>model.FullName"/></div>
+                            <div><label for="contact-email">Email address <span aria-hidden="true">*</span></label><ContactTextInput id="contact-email" type="email" @bind-Value="model.Email" autocomplete="email" maxlength="254" required aria-required="true"/><ValidationMessage For="()=>model.Email"/></div>
+                            <div><label for="contact-phone">International phone <span class="contact-optional">(optional)</span></label><ContactTextInput id="contact-phone" type="tel" @bind-Value="model.Phone" autocomplete="tel" maxlength="32" placeholder="+92 300 1234567" aria-describedby="phone-help"/><small id="phone-help">Include + and your country code. Phone ownership is not verified.</small><ValidationMessage For="()=>model.Phone"/></div>
+                            <div><label for="contact-category">Inquiry category <span aria-hidden="true">*</span></label><InputSelect id="contact-category" @bind-Value="model.Category" required aria-required="true">@foreach(var category in ContactRequest.Categories){<option value="@category.Key">@category.Value</option>}</InputSelect><ValidationMessage For="()=>model.Category"/></div>
+                            <div class="contact-wide"><label for="contact-order">Order reference <span class="contact-optional">(optional)</span></label><ContactTextInput id="contact-order" @bind-Value="model.OrderReference" maxlength="64" placeholder="Your guest reference or account order number" aria-describedby="order-help"/><small id="order-help">For context only. Entering a reference does not reveal or authorize access to an order.</small><ValidationMessage For="()=>model.OrderReference"/></div>
+                            <div class="contact-wide"><label for="contact-message">Message <span aria-hidden="true">*</span></label><ContactTextArea id="contact-message" @bind-Value="model.Message" rows="7" minlength="10" maxlength="4000" required aria-required="true" aria-describedby="message-help"/><small id="message-help">10–4,000 characters. Plain text, please.</small><ValidationMessage For="()=>model.Message"/></div>
+                        </div>
+                        <div class="contact-honeypot" aria-hidden="true"><label for="contact-website">Leave this field empty</label><InputText id="contact-website" @bind-Value="model.Website" tabindex="-1" autocomplete="off" maxlength="200"/></div>
+                        <button class="button button-primary contact-submit" type="submit" disabled="@busy">@if(busy){<span class="button-spinner" aria-hidden="true"></span>}@(busy?"Saving your inquiry…":"Save demo inquiry")<span aria-hidden="true">↗</span></button>
+                    </fieldset>
+                </EditForm>
+                <button type="button" class="text-button contact-refresh" disabled="@(busy||loading)" @onclick="RefreshSession">Refresh form session</button>
+                <p class="contact-footnote">The form session expires after 20 minutes. Refreshing it keeps your entered message. Submitting twice with unchanged details will not create a duplicate.</p>
+            }
+        </div>
+    </div>
+</section>
+<section class="shell contact-faq" id="contact-faq" aria-labelledby="contact-faq-title">
+    <div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2 id="contact-faq-title">A little clarity.</h2></div><p>Honest answers about this demonstration store.</p></div>
+    <div class="contact-faq-grid">
+        <details><summary>Will I receive an email or a reply?</summary><p>No email delivery service or monitored support inbox is configured. The form saves a demonstration inquiry only; it does not promise a response.</p></details>
+        <details><summary>Was I charged for my order?</summary><p>No. Checkout simulates order creation. ShopQevora does not collect real payments or card details.</p></details>
+        <details><summary>When will my order arrive?</summary><p>No products are shipped or fulfilled by this project. Demo order records do not include real delivery or tracking services.</p></details>
+        <details><summary>What about returns and refunds?</summary><p>There are no real purchases or payments to refund. No commercial return policy or refund guarantee is offered by this demo.</p></details>
+        <details><summary>Can I shop without creating an account?</summary><p>Yes. Guests can keep a local shopping bag and place a demo order. Signed-in customers also have a persistent account cart and order history.</p></details>
+        <details><summary>Which order reference should I enter?</summary><p>You may enter your guest reference beginning GQ- or an account order number. It is optional, and submitting it does not grant access to any private order details.</p></details>
+    </div>
+</section>
+@code {
+    ContactRequest model=new();ContactReceipt? receipt;string error="";bool busy,loading,focusConfirmation;ElementReference confirmation;
+    protected override async Task OnInitializedAsync()
+    {
+        try{await Shop.Initialize();}catch{/* The public contact form also works without browser storage. */}
+        model.Email=Shop.LoggedIn?Shop.Email??"":"";
+        await RefreshSession();
+    }
+    async Task RefreshSession()
+    {
+        if(busy)return;loading=true;error="";
+        try{var challenge=await Shop.ContactChallenge(model.SubmissionKey);model.SubmissionKey=challenge.SubmissionKey;model.FormToken=challenge.FormToken;}
+        catch{error="We couldn’t prepare the form. Check your connection and refresh the form session to try again.";}
+        finally{loading=false;}
+    }
+    async Task Submit()
+    {
+        if(busy||loading)return;busy=true;error="";
+        try{receipt=await Shop.SendInquiry(model);model=new();focusConfirmation=true;}
+        catch(Exception e){error=e is InvalidOperationException?e.Message:"We couldn’t save your inquiry. Your message is still here; check your connection and try again.";}
+        finally{busy=false;}
+    }
+    async Task NewInquiry(){receipt=null;model=new(){Email=Shop.LoggedIn?Shop.Email??"":""};await RefreshSession();}
+    protected override async Task OnAfterRenderAsync(bool first){if(focusConfirmation){focusConfirmation=false;await confirmation.FocusAsync();}}
+}

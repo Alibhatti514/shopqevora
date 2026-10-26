@@ -1,0 +1,22 @@
+{
+  "name": "shopqevora",
+  "version": "1.0.0",
+  "description": "Playwright end-to-end verification for the real ShopQevora Blazor/MySQL application",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report test-output/report",
+    "test:js": "node --test tests/ui/*.test.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}

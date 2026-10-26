@@ -1,0 +1,35 @@
+@page "/checkout"
+@inject NavigationManager Nav
+@using Microsoft.AspNetCore.Components.Forms
+<PageTitle>Guest checkout — ShopQevora</PageTitle>
+<section class="shell page"><span class="eyebrow">YOUR EVERYDAY, ALMOST YOURS</span><h1>Checkout, your way.</h1>
+@if(!ready){<p role="status">Preparing your selection…</p>}
+else if(Shop.LoggedIn){<div class="empty"><h2>You're signed in.</h2><p>Your account bag and order history are ready.</p><a class="button button-primary" href="/cart">Continue with your account</a></div>}
+else if(items.Count==0){<div class="empty"><h2>Your bag is waiting.</h2><p>Add something you love before checking out.</p><a class="button button-primary" href="/#collection">Explore the collection</a></div>}
+else{
+    <div class="checkout-layout"><div>
+        <div class="checkout-choice"><button type="button" class="button @(showForm?"button-primary":"")" aria-pressed="@showForm" @onclick="()=>showForm=true">Continue as Guest</button><a class="button" href="/login">Sign In</a><a class="text-link" href="/register">Create Account</a></div>
+        @if(showForm){<div class="checkout-card"><h2>Your delivery details.</h2><p>Pakistan demo addresses only. This records a demo order; no payment is taken and nothing is shipped. Please use fictional contact details for demonstrations.</p>
+        <EditForm Model="contact" OnValidSubmit="Place"><DataAnnotationsValidator/><div aria-live="polite"><ValidationSummary class="error"/></div>
+            <div class="checkout-fields">
+                <div><label for="guest-name">Full name</label><InputText id="guest-name" autocomplete="name" maxlength="120" @bind-Value="contact.FullName"/><ValidationMessage For="()=>contact.FullName"/></div>
+                <div><label for="guest-email">Email address</label><InputText id="guest-email" type="email" autocomplete="email" maxlength="254" @bind-Value="contact.Email"/><ValidationMessage For="()=>contact.Email"/></div>
+                <div><label for="guest-phone">Phone number</label><InputText id="guest-phone" type="tel" autocomplete="tel" maxlength="30" placeholder="+92 300 1234567" @bind-Value="contact.Phone"/><ValidationMessage For="()=>contact.Phone"/></div>
+                <div><label for="guest-country">Country</label><input id="guest-country" value="Pakistan" readonly aria-describedby="country-note"/><small id="country-note">Only Pakistan demo addresses are currently supported.</small></div>
+                <div class="field-wide"><label for="guest-address">Street address</label><InputTextArea id="guest-address" autocomplete="street-address" rows="3" maxlength="500" placeholder="House or apartment, street, area" @bind-Value="contact.Address"/><ValidationMessage For="()=>contact.Address"/></div>
+                <div><label for="guest-city">City</label><InputText id="guest-city" autocomplete="address-level2" maxlength="80" @bind-Value="contact.City"/><ValidationMessage For="()=>contact.City"/></div>
+                <div><label for="guest-region">Province / region</label><InputText id="guest-region" autocomplete="address-level1" maxlength="80" placeholder="For example, Sindh" @bind-Value="contact.Region"/><ValidationMessage For="()=>contact.Region"/></div>
+                <div><label for="guest-postal">Postal code <span>(optional)</span></label><InputText id="guest-postal" autocomplete="postal-code" maxlength="20" @bind-Value="contact.PostalCode"/><ValidationMessage For="()=>contact.PostalCode"/></div>
+            </div>
+            <div class="demo-payment"><strong>Demo order · No payment</strong><p>No card details, cash collection, shipping, or fulfillment. Your final total is verified by the server.</p></div>
+            <button type="submit" class="button button-primary full" disabled="@(busy||items.Any(i=>i.Product.Price<=0))">@(busy?"Confirming your demo order…":"Place guest demo order ↗")</button>
+        </EditForm></div>}
+    </div><aside class="summary"><span class="eyebrow">A CONSIDERED SELECTION</span><h2>Your order.</h2>@foreach(var item in items){<div class="checkout-summary-item"><img src="@ProductPresentation.Image(item.Product)" alt="@item.Product.Name" width="56" height="64"/><div><strong>@item.Product.Name</strong><span>@item.Quantity × @Money(item.Product.Price)</span></div><strong>@Money(item.Product.Price*item.Quantity)</strong></div>}<div class="summary-line"><span>Total · USD</span><strong>@Money(items.Sum(i=>i.Product.Price*i.Quantity))</strong></div><p>No taxes or shipping are added in this demo. Prices are verified at order placement.</p><a class="text-link" href="/cart">← Edit your bag</a></aside></div>
+}
+@if(error!=""){<p class="error" role="alert">@error</p>}</section>
+@code {
+    GuestContact contact=new();List<CartItem> items=[];bool ready,showForm,busy;string error="";
+    static string Money(decimal value)=>value.ToString("C",System.Globalization.CultureInfo.GetCultureInfo("en-US"));
+    protected override async Task OnInitializedAsync(){try{items=await Shop.Cart();}catch{error="We couldn't load your bag. Check your connection and try again.";}finally{ready=true;}}
+    async Task Place(){if(busy)return;busy=true;error="";try{await Shop.GuestCheckout(contact);Nav.NavigateTo("/guest-confirmation");}catch(Exception ex){error=ex is HttpRequestException?"We couldn't reach the store. Your bag is preserved; retry with the same details.":ex.Message;}finally{busy=false;}}
+}

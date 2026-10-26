@@ -1,0 +1,46 @@
+@page "/account"
+@page "/account/{Section}"
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager Nav
+<PageTitle>My Account — ShopQevora</PageTitle>
+<section class="shell account-page"><span class="eyebrow">YOUR EVERYDAY, PERSONALIZED</span><h1>@Title</h1>
+@if(!ready){<p role="status">Opening your account…</p>}
+else if(!Shop.LoggedIn){<p>Sign in to manage your profile and security.</p><a class="button button-primary" href="/login">Sign In</a>}
+else{
+<div class="profile-grid"><nav class="account-sidebar" aria-label="Account navigation"><a href="/account">My Profile</a><a href="/account/edit">Edit Profile</a><a href="/orders">My Orders</a><a href="/account/settings">Account Settings</a><button class="text-button" @onclick="Logout">Sign Out</button></nav><div>
+@if(message!=""){<p class="profile-notice" role="status">@message</p>}
+@if(profile is null){<p>We couldn’t load your profile.</p><button class="button" @onclick="Load">Retry</button>}
+else if(Section=="settings"){
+<h2>Account security</h2><p>Sign-in email: @profile.Email · @(profile.EmailVerified?"Verified":"Not verified")</p>
+@if(profile.PendingEmail is not null){<p class="profile-notice">Pending email request: @profile.PendingEmail. Email delivery is not configured; your sign-in email has not changed.</p>}
+<form class="profile-form" @onsubmit="ChangePassword" @onsubmit:preventDefault><h3 class="wide">Change Password</h3><label class="wide">Current password<input type="password" autocomplete="current-password" required @bind="currentPassword"/></label><label class="wide">New password<input type="password" autocomplete="new-password" minlength="8" maxlength="128" required @bind="newPassword"/></label><button class="button button-primary wide" disabled="@busy">@(busy?"Saving…":"Change Password")</button></form>
+<form class="profile-form" @onsubmit="ChangeEmail" @onsubmit:preventDefault><h3 class="wide">Request an email change</h3><p class="wide">Requests remain pending in this demo. No verification email is sent and no email is marked verified.</p><label class="wide">New email<input type="email" autocomplete="email" maxlength="254" required @bind="newEmail"/></label><label class="wide">Password to confirm email request<input type="password" autocomplete="current-password" required @bind="emailPassword"/></label><button class="button wide" disabled="@busy">Save pending email request</button></form><p>Sign out ends this browser session. Password changes revoke sessions issued by this version. Older compatible sessions expire within eight hours.</p>
+}
+else if(Section=="edit"){
+<div>@if(profile.Avatar is not null){<img class="avatar" src="@profile.Avatar" alt="Your profile photo"/>}else{<span class="avatar" aria-label="Initials avatar">@Initials</span>}
+<label for="avatar-file">Profile photo · PNG, JPEG or WebP, maximum 40 KB, 2048 × 2048</label><InputFile id="avatar-file" OnChange="Upload" accept="image/png,image/jpeg,image/webp" disabled="@busy"/><button class="text-button" disabled="@busy" @onclick="RemoveAvatar">Remove photo</button>@if(preview is not null){<img class="avatar" src="@preview" alt="New profile photo preview"/><button class="button" @onclick="SaveAvatar" disabled="@busy">Save photo</button>}</div>
+<form class="profile-form" @onsubmit="Save" @onsubmit:preventDefault>
+<label>Full name<input maxlength="120" autocomplete="name" @bind="profile.FullName"/></label><label>Display name<input maxlength="60" @bind="profile.DisplayName"/></label>
+<label>Country dialing code<select @bind="profile.PhoneRegion">@foreach(var dialing in codes.OrderBy(x=>x.CountryName)){<option value="@dialing.Region">@dialing.CountryName +@dialing.Code</option>}</select></label><label>Phone number<input type="tel" maxlength="32" autocomplete="tel" @bind="profile.Phone"/></label><small class="wide">Numbers are normalized where possible. Phone ownership is not verified.</small>
+<label class="wide">Shipping address<input maxlength="240" autocomplete="street-address" @bind="profile.Address"/></label><label>City<input maxlength="100" autocomplete="address-level2" @bind="profile.City"/></label><label>Province / State<input maxlength="100" autocomplete="address-level1" @bind="profile.Region"/></label><label>Postal code<input maxlength="20" autocomplete="postal-code" @bind="profile.PostalCode"/></label><label>Country<select @bind="profile.Country">@foreach(var dialing in codes.OrderBy(x=>x.CountryName)){<option value="@dialing.Region">@dialing.CountryName</option>}</select></label><p class="wide">This is your saved default address; checkout remains a demo and does not promise shipping to any destination.</p><button class="button button-primary wide" disabled="@busy">@(busy?"Saving…":"Save profile")</button></form>
+}
+else{
+@if(profile.Avatar is not null){<img class="avatar" src="@profile.Avatar" alt="Your profile photo"/>}else{<span class="avatar" aria-label="Initials avatar">@Initials</span>}
+<h2>@(profile.DisplayName!=""?profile.DisplayName:profile.FullName!=""?profile.FullName:"Welcome to your account")</h2><dl class="profile-summary"><dt>Email</dt><dd>@profile.Email</dd><dt>Full name</dt><dd>@(profile.FullName!=""?profile.FullName:"Not added")</dd><dt>Phone · not ownership-verified</dt><dd>@(profile.Phone!=""?profile.Phone:"Not added")</dd><dt>Default shipping address</dt><dd>@(profile.Address!=""?string.Join(", ",new[]{profile.Address,profile.City,profile.Region,profile.PostalCode,profile.Country}.Where(x=>!string.IsNullOrWhiteSpace(x))):"Not added")</dd></dl><a href="/account/edit" class="button button-primary">Edit Profile</a>
+}
+</div></div>}
+</section>
+@code{
+ [Parameter]public string? Section{get;set;} CustomerProfile? profile;List<DialingCode> codes=[];bool ready,busy;string message="",currentPassword="",newPassword="",newEmail="",emailPassword="";string? preview,photoType,photoData;
+ string Title=>Section=="edit"?"Edit Profile":Section=="settings"?"Account Settings":"My Profile";
+ string Initials=>string.Concat((profile?.FullName is {Length:>0} name?name:Shop.Email??"SQ").Split(' ',StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x=>x[0])).ToUpperInvariant();
+ protected override async Task OnInitializedAsync(){await Shop.Initialize();await Load();ready=true;}
+ async Task Load(){if(!Shop.LoggedIn)return;try{profile=await Shop.Profile();codes=await Shop.DialingCodes();}catch(Exception e){message=e.Message;}}
+ async Task Save(){if(busy||profile is null)return;busy=true;try{message=await Shop.SaveProfile(profile)??"Profile saved.";await Load();}catch{message="Could not save your profile. Please retry.";}finally{busy=false;}}
+ async Task Upload(InputFileChangeEventArgs e){try{var f=e.File;if(f.Size>40960||f.ContentType is not ("image/png" or "image/jpeg" or "image/webp")){message="Choose a PNG, JPEG or WebP image up to 40 KB.";return;}using var output=new MemoryStream();await f.OpenReadStream(40960).CopyToAsync(output);photoData=Convert.ToBase64String(output.ToArray());photoType=f.ContentType;preview="data:"+photoType+";base64,"+photoData;message="Preview ready. Save photo to upload for server validation.";}catch{message="The image could not be opened.";}}
+ async Task SaveAvatar(){if(busy)return;busy=true;try{message=await Shop.AccountAction("avatar",new{ContentType=photoType,Data=photoData})??"Profile photo saved.";preview=null;photoData=null;await Load();}catch{message="Could not save the photo.";}finally{busy=false;}}
+ async Task RemoveAvatar(){busy=true;try{message=await Shop.AccountAction("avatar",null,HttpMethod.Delete)??"Photo removed.";preview=null;await Load();}catch{message="Could not remove the photo.";}finally{busy=false;}}
+ async Task ChangePassword(){if(busy)return;busy=true;try{var error=await Shop.AccountAction("password",new{currentPassword,newPassword});if(error is null){await Shop.Logout();Nav.NavigateTo("/login");}else message=error;}catch{message="Could not change password.";}finally{currentPassword="";newPassword="";busy=false;}}
+ async Task ChangeEmail(){if(busy)return;busy=true;try{message=await Shop.AccountAction("email",new{Email=newEmail,CurrentPassword=emailPassword})??"Request saved as pending. No verification email was sent; your sign-in email is unchanged.";await Load();}catch{message="Could not request email change.";}finally{emailPassword="";busy=false;}}
+ async Task Logout(){await Shop.Logout();Nav.NavigateTo("/login");}
+}

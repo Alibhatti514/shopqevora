@@ -1,0 +1,4 @@
+@page "/information/{Slug}"
+<PageTitle>@(Content?.Title ?? "Page unavailable") — ShopQevora</PageTitle>
+<section class="shell account-page"><span class="eyebrow">SHOPQEVORA · PROJECT INFORMATION</span><h1>@(Content?.Title ?? "Page unavailable")</h1><p class="information-copy">@(Content?.Text ?? "This information page does not exist.")</p><a class="button button-primary" href="/#collection">Explore the collection</a></section>
+@code{[Parameter]public string Slug{get;set;}="";InformationPages.Content? Content=>InformationPages.Links.GetValueOrDefault(Slug);}

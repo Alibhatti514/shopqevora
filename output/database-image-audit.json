@@ -1,0 +1,162 @@
+[
+  {
+    "productID": 1,
+    "name": "Studio Headphones",
+    "price": 129.0,
+    "category": "Electronics",
+    "description": "Wireless sound with everyday comfort",
+    "imageUrl": "/images/products/headphones.webp"
+  },
+  {
+    "productID": 2,
+    "name": "Minimal Desk Lamp",
+    "price": 79.0,
+    "category": "Home",
+    "description": "Warm light for focused work",
+    "imageUrl": "/images/products/lamp.webp"
+  },
+  {
+    "productID": 3,
+    "name": "Everyday Backpack",
+    "price": 94.0,
+    "category": "Lifestyle",
+    "description": "A durable companion for daily essentials",
+    "imageUrl": "/images/products/backpack.webp"
+  },
+  {
+    "productID": 4,
+    "name": "Smart Watch",
+    "price": 199.0,
+    "category": "Electronics",
+    "description": "Stay connected on the move",
+    "imageUrl": "/images/products/watch.webp"
+  },
+  {
+    "productID": 5,
+    "name": "Ceramic Coffee Cup",
+    "price": 24.0,
+    "category": "Home",
+    "description": "Simple, timeless drinkware",
+    "imageUrl": "/images/products/cup.webp"
+  },
+  {
+    "productID": 6,
+    "name": "Canvas Sneakers",
+    "price": 89.0,
+    "category": "Lifestyle",
+    "description": "Comfort for every step",
+    "imageUrl": "/images/products/shoes.webp"
+  },
+  {
+    "productID": 7,
+    "name": "Pocket Sound Speaker",
+    "price": 59.0,
+    "category": "Electronics",
+    "description": "Room-filling sound in a portable silhouette",
+    "imageUrl": "/images/products/speaker.webp"
+  },
+  {
+    "productID": 8,
+    "name": "Sculpture Ceramic Vase",
+    "price": 42.0,
+    "category": "Home",
+    "description": "A quiet sculptural accent for your favorite stems",
+    "imageUrl": "/images/products/vase.webp"
+  },
+  {
+    "productID": 9,
+    "name": "Evening Ritual Candle",
+    "price": 28.0,
+    "category": "Home",
+    "description": "Make space for a slower evening",
+    "imageUrl": "/images/products/candle.webp"
+  },
+  {
+    "productID": 10,
+    "name": "Daily Hydration Bottle",
+    "price": 32.0,
+    "category": "Lifestyle",
+    "description": "Refill, refresh, repeat. A reusable daily essential",
+    "imageUrl": "/images/products/bottle.webp"
+  },
+  {
+    "productID": 11,
+    "name": "Weekender Travel Organizer",
+    "price": 38.0,
+    "category": "Accessories",
+    "description": "Keep the little things together on every journey",
+    "imageUrl": "/images/products/travel.webp"
+  },
+  {
+    "productID": 12,
+    "name": "Market Canvas Tote",
+    "price": 29.0,
+    "category": "Lifestyle",
+    "description": "An effortless carryall for the everyday",
+    "imageUrl": "/images/products/tote.webp"
+  },
+  {
+    "productID": 13,
+    "name": "Weekend Sneakers",
+    "price": 95.0,
+    "category": "Fashion",
+    "description": "A clean silhouette for days on the go",
+    "imageUrl": "/images/products/shoes.webp"
+  },
+  {
+    "productID": 14,
+    "name": "Everyday Cotton Cap",
+    "price": 25.0,
+    "category": "Fashion",
+    "description": "Your finishing touch for sun-filled days",
+    "imageUrl": "/images/products/cap.webp"
+  },
+  {
+    "productID": 15,
+    "name": "Sunday Sunglasses",
+    "price": 49.0,
+    "category": "Accessories",
+    "description": "A classic frame with a contemporary point of view",
+    "imageUrl": "/images/products/sunglasses.webp"
+  },
+  {
+    "productID": 16,
+    "name": "Slow Morning Hoodie",
+    "price": 78.0,
+    "category": "Fashion",
+    "description": "Soft layers for your off-duty uniform",
+    "imageUrl": "/images/products/hoodie.webp"
+  },
+  {
+    "productID": 17,
+    "name": "Studio Desk Organizer",
+    "price": 35.0,
+    "category": "Workspace",
+    "description": "A considered home for your desk essentials",
+    "imageUrl": "/images/products/organizer.webp"
+  },
+  {
+    "productID": 18,
+    "name": "Daily Notes Journal",
+    "price": 18.0,
+    "category": "Workspace",
+    "description": "A fresh page for your next good idea",
+    "imageUrl": "/images/products/notebook.webp"
+  },
+  {
+    "productID": 19,
+    "name": "Quiet Wireless Keyboard",
+    "price": 89.0,
+    "category": "Workspace",
+    "description": "A more comfortable rhythm for your working day",
+    "imageUrl": "/images/products/keyboard.webp"
+  },
+  {
+    "productID": 20,
+    "name": "Desktop Charging Station",
+    "price": 55.0,
+    "category": "Electronics",
+    "description": "A dedicated place to recharge your everyday devices",
+    "imageUrl": "/images/products/charging.webp"
+  }
+]

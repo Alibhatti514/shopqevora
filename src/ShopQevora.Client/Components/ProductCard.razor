@@ -1,0 +1,20 @@
+<article class="product-card">
+    <div class="product-image">
+        <img src="@ProductPresentation.Image(Product)" srcset="@ProductPresentation.SourceSet(Product)" sizes="(max-width: 350px) 90vw, (max-width: 767px) 44vw, (max-width: 1023px) 45vw, 23vw" alt="@ProductPresentation.Alt(Product)" loading="lazy" decoding="async" width="800" height="1000"/>
+        @if(!string.IsNullOrWhiteSpace(Badge)){<span class="product-tag">@Badge</span>}
+        <span class="image-corner" aria-hidden="true">SQ</span>
+    </div>
+    <div class="product-meta">
+        <span class="category">@ProductPresentation.CategoryLabel(Product.Category)</span>
+        <div class="product-title"><h3>@Product.Name</h3><strong>@Product.Price.ToString("C",System.Globalization.CultureInfo.GetCultureInfo("en-US"))</strong></div>
+        <p>@Product.Description</p>
+        <button type="button" class="button product-add" disabled="@busy" aria-label="Add @Product.Name to your bag" @onclick="Add">@if(busy){<span class="button-spinner" aria-hidden="true"></span>}<span>@(busy?"Adding to your bag…":"Add to bag")</span><span aria-hidden="true">+</span></button>
+    </div>
+</article>
+@code {
+    [Parameter,EditorRequired] public Product Product {get;set;}=new();
+    [Parameter] public EventCallback<Product> OnAdd {get;set;}
+    [Parameter] public string? Badge {get;set;}
+    bool busy;
+    async Task Add(){if(busy)return;busy=true;try{await OnAdd.InvokeAsync(Product);}finally{busy=false;}}
+}

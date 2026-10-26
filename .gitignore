@@ -1,0 +1,41 @@
+**/bin/
+**/obj/
+.vs/
+.vscode/
+.DS_Store
+.env
+**/appsettings.Development.json
+TestResults/
+
+node_modules/
+.e2e/
+test-output/
+playwright-report/
+playwright/.cache/
+
+/output/browser-qa/
+
+# Local database and private configuration
+docker-compose.yml
+.env.*
+*.sql.gz
+*.sql.bak
+*.dump
+*.backup
+*.bak
+*.pem
+*.pfx
+*.key
+*.snk
+secrets.json
+
+# Local database exports and backups
+database/backups/
+backups/
+*.sqlite
+*.sqlite3
+
+# Additional generated files
+**/TestResults/
+**/coverage/
+*.trx

@@ -1,0 +1,15 @@
+import {test,expect,email,home,add,account,login,API,shot} from './helpers';
+import {randomBytes} from 'node:crypto';
+test('UI registration, login, refresh and logout',async({page})=>{
+ const user={email:email(),password:'Qq8!'+randomBytes(16).toString('hex')};await page.goto('/register');await expect(page.locator('#startup-screen')).toHaveCount(0);await page.locator('#email').fill(user.email);await page.locator('#password').fill(user.password);await page.getByRole('button',{name:'Show password'}).click();await expect(page.locator('#password')).toHaveAttribute('type','text');await page.getByRole('button',{name:'Create account',exact:true}).click();await expect(page).toHaveURL(/\/login$/);
+ await login(page,user);await page.reload();await expect(page.locator('#startup-screen')).toHaveCount(0);await page.getByRole('button',{name:'Open menu'}).click();await expect(page.getByRole('button',{name:'Sign Out',exact:true})).toBeVisible();await page.getByRole('button',{name:'Sign Out',exact:true}).click();await expect(page).toHaveURL('/');await page.getByRole('button',{name:'Open menu'}).click();await expect(page.locator('#navigation').getByRole('link',{name:'Sign In',exact:true})).toBeVisible();expect(await page.evaluate(()=>sessionStorage.getItem('shopqevora_token'))).toBeNull();
+});
+test('invalid credentials are clear and protected APIs stay protected',async({page,audit})=>{
+ const user=await account(page.request);audit.allow('/api/auth/login',401);await page.goto('/login');await expect(page.locator('#startup-screen')).toHaveCount(0);await page.locator('#email').fill(user.email);await page.locator('#password').fill('Wrong9!'+randomBytes(10).toString('hex'));await page.getByRole('button',{name:'Sign in',exact:true}).click();await expect(page.getByRole('alert')).toContainText('Incorrect email or password');
+ for(const path of ['/api/cart','/api/orders'])expect((await page.request.get(API+path)).status()).toBe(401);await page.goto('/orders');await expect(page.locator('main')).toContainText('Please sign in');await shot(page,'protected-order-history');
+});
+test('guest to account merge is maximum-quantity, persistent and duplicate-free',async({page})=>{
+ const user=await account(page.request);const headers={Authorization:`Bearer ${user.token}`};await page.request.post(API+'/api/cart/1',{headers});await page.request.put(API+'/api/cart/1',{headers,data:{quantity:3}});
+ await home(page);await add(page);await add(page);await add(page,'Ceramic Coffee Cup');await login(page,user);await expect(page.locator('.cart-row')).toHaveCount(2);await expect(page.locator('.cart-row').filter({hasText:'Studio Headphones'}).locator('.qty')).toHaveValue('3');await expect(page.locator('.notice')).toContainText('larger quantity');
+ expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('shopqevora_guest_cart_v1')!).Lines)).toEqual([]);await page.reload();await expect(page.locator('#startup-screen')).toHaveCount(0);await expect(page.locator('.cart-row')).toHaveCount(2);await expect(page.locator('.summary')).toContainText('$411.00');
+});

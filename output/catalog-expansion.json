@@ -1,0 +1,258 @@
+[
+  {
+    "name": "Arc Over-Ear Stand",
+    "file": "headphone-stand",
+    "category": "Workspace",
+    "price": 34,
+    "description": "A curved walnut stand for keeping headphones within reach.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-13c5f7e6-8f10-4f96-b3bd-404f940870f8.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A curved walnut stand for keeping headphones within reach. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Arc Over-Ear Stand.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/headphone-stand.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/headphone-stand-400.webp"
+    ]
+  },
+  {
+    "name": "Linen Cushion Cover",
+    "file": "cushion",
+    "category": "Home",
+    "price": 26,
+    "description": "A textured oatmeal cushion cover for relaxed spaces.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-75e0f130-2558-4c62-a4bd-b7303760598e.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A textured oatmeal cushion cover for relaxed spaces. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Linen Cushion Cover.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/cushion.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/cushion-400.webp"
+    ]
+  },
+  {
+    "name": "Pebble Catchall Tray",
+    "file": "tray",
+    "category": "Home",
+    "price": 22,
+    "description": "A shallow ivory ceramic tray for everyday small essentials.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-5ff0d6fe-ad0e-4b7b-8979-94791b86cb39.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A shallow ivory ceramic tray for everyday small essentials. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Pebble Catchall Tray.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/tray.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/tray-400.webp"
+    ]
+  },
+  {
+    "name": "Pour Over Coffee Set",
+    "file": "coffee-set",
+    "category": "Home",
+    "price": 46,
+    "description": "An ivory ceramic dripper and matching glass server for slow mornings.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-795daeb1-0c9c-4c93-b5c1-78738a2b355a.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of An ivory ceramic dripper and matching glass server for slow mornings. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Pour Over Coffee Set.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/coffee-set.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/coffee-set-400.webp"
+    ]
+  },
+  {
+    "name": "Ribbed Glass Carafe",
+    "file": "carafe",
+    "category": "Home",
+    "price": 38,
+    "description": "A clear ribbed glass carafe with a simple cork stopper.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-7276e982-eeba-4f7f-a317-b076bfe9de57.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A clear ribbed glass carafe with a simple cork stopper. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Ribbed Glass Carafe.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/carafe.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/carafe-400.webp"
+    ]
+  },
+  {
+    "name": "Foldaway Travel Duffel",
+    "file": "duffel",
+    "category": "Travel",
+    "price": 68,
+    "description": "A sand canvas overnight bag with forest green handles.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-030b889d-7324-4e03-9c46-228e2e46d8fd.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A sand canvas overnight bag with forest green handles. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Foldaway Travel Duffel.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/duffel.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/duffel-400.webp"
+    ]
+  },
+  {
+    "name": "Passport Folio",
+    "file": "passport",
+    "category": "Travel",
+    "price": 32,
+    "description": "A compact olive folio for documents and travel essentials.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-3ac7b63d-450c-4f07-a94e-59b7ff2de63d.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A compact olive folio for documents and travel essentials. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Passport Folio.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/passport.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/passport-400.webp"
+    ]
+  },
+  {
+    "name": "Cloud Travel Pillow",
+    "file": "pillow",
+    "category": "Travel",
+    "price": 29,
+    "description": "A soft sage neck pillow for taking a comfortable break.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-a9c0f324-1c0b-4539-a440-f09f44a8ea62.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A soft sage neck pillow for taking a comfortable break. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Cloud Travel Pillow.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/pillow.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/pillow-400.webp"
+    ]
+  },
+  {
+    "name": "Everyday Crossbody",
+    "file": "crossbody",
+    "category": "Accessories",
+    "price": 62,
+    "description": "A small forest green crossbody bag with an adjustable strap.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-68db512b-c1e6-422a-b32c-29409a8e0d9f.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A small forest green crossbody bag with an adjustable strap. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Everyday Crossbody.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/crossbody.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/crossbody-400.webp"
+    ]
+  },
+  {
+    "name": "Braided Cotton Belt",
+    "file": "belt",
+    "category": "Accessories",
+    "price": 24,
+    "description": "A natural woven cotton belt with a brushed rectangular buckle.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-57492696-5bc4-4ee8-8741-944e13b45128.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A natural woven cotton belt with a brushed rectangular buckle. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Braided Cotton Belt.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/belt.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/belt-400.webp"
+    ]
+  },
+  {
+    "name": "Ribbed Knit Beanie",
+    "file": "beanie",
+    "category": "Fashion",
+    "price": 23,
+    "description": "An oatmeal knit beanie with a simple folded cuff.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-d4b48d22-9088-4e2a-a938-550c131bdf3f.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of An oatmeal knit beanie with a simple folded cuff. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Ribbed Knit Beanie.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/beanie.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/beanie-400.webp"
+    ]
+  },
+  {
+    "name": "Essential Cotton Shirt",
+    "file": "shirt",
+    "category": "Fashion",
+    "price": 58,
+    "description": "An ivory long-sleeve cotton shirt with a relaxed silhouette.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-20a532b4-10b7-43ed-a38d-2444e9f95b1a.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of An ivory long-sleeve cotton shirt with a relaxed silhouette. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Essential Cotton Shirt.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/shirt.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/shirt-400.webp"
+    ]
+  },
+  {
+    "name": "Cork Yoga Block",
+    "file": "yoga-block",
+    "category": "Wellness",
+    "price": 19,
+    "description": "A natural cork block for supporting comfortable movement.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-7593dc64-3137-48a3-930e-43721cc21723.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A natural cork block for supporting comfortable movement. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Cork Yoga Block.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/yoga-block.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/yoga-block-400.webp"
+    ]
+  },
+  {
+    "name": "Woven Stretch Strap",
+    "file": "stretch-strap",
+    "category": "Wellness",
+    "price": 16,
+    "description": "A sand woven exercise strap with a simple metal loop.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-22e1e666-6f64-46a7-89a9-9c01e5eb6ac2.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A sand woven exercise strap with a simple metal loop. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Woven Stretch Strap.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/stretch-strap.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/stretch-strap-400.webp"
+    ]
+  },
+  {
+    "name": "Slim Laptop Sleeve",
+    "file": "laptop-sleeve",
+    "category": "Workspace",
+    "price": 39,
+    "description": "A sage felt sleeve for organizing a compact laptop.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-d8073e5b-bf3a-4768-a131-890f93c5be81.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of A sage felt sleeve for organizing a compact laptop. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Slim Laptop Sleeve.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/laptop-sleeve.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/laptop-sleeve-400.webp"
+    ]
+  },
+  {
+    "name": "Pocket Audio Earbuds",
+    "file": "earbuds",
+    "category": "Electronics",
+    "price": 64,
+    "description": "Forest green wireless earbuds in a matching compact case.",
+    "source": "/Users/ali_bhatti/.codex/generated_images/01a17554-45c3-71e3-a426-2e146a213ed8/exec-74e5747a-972e-4959-9004-c564c1234fe4.png",
+    "provenance": "Original AI-generated product visualization, OpenAI imagegen, 2026-10-26. Illustrative demo product.",
+    "tool": "OpenAI built-in image_gen",
+    "useCase": "product-mockup",
+    "prompt": "Generate one premium photorealistic ecommerce studio product photograph of Forest green wireless earbuds in a matching compact case. Single product only, fully visible centered, warm ivory seamless background, soft studio light from upper left, restrained forest green sage oatmeal palette, realistic materials, elegant neutral shadows, square composition, consistent premium lifestyle catalog photography. No text, no logos, no trademarked branding, no props, no border. This is the product Pocket Audio Earbuds.",
+    "assets": [
+      "src/ShopQevora.Client/wwwroot/images/products/earbuds.webp",
+      "src/ShopQevora.Client/wwwroot/images/products/earbuds-400.webp"
+    ]
+  }
+]

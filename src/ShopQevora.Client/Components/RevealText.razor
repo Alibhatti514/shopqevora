@@ -1,0 +1,7 @@
+<span class="reveal-text" data-reveal="@Mode"><span class="sr-only">@Text</span><span aria-hidden="true">@for(var i=0;i<pieces.Length;i++){<span class="motion-piece" style="@($"--piece-delay:{Math.Min(i*(Mode=="typing"?14:55),700)}ms")">@pieces[i]</span>}</span></span>
+@code {
+ [Parameter,EditorRequired]public string Text{get;set;}="";
+ [Parameter]public string Mode{get;set;}="words";
+ string[] pieces=[];
+ protected override void OnParametersSet(){pieces=Mode=="typing"?Text.Select(c=>c.ToString()).ToArray():System.Text.RegularExpressions.Regex.Matches(Text,@"\S+\s*").Select(m=>m.Value).ToArray();}
+}
