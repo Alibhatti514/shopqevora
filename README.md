@@ -126,7 +126,7 @@ See [VERIFICATION.md](VERIFICATION.md) for exact executed results. Current Playw
 
 Port already used: stop the older processes before starting the renamed projects. Missing secrets: use the API's unchanged UserSecretsId privately. Missing guest schema: follow DATABASE_UPGRADE.md rather than resetting MySQL. Unavailable database: check native service, port 3306 and existing account grants. Expired sessions: sign in again. Guest reference/confirmation unavailable after refresh: intentional memory-only UI; no public lookup exists. Browser storage disabled: guest persistence cannot work reliably; the UI reports errors.
 
-Photographs, product visual provenance and licenses remain documented in IMAGE_AUDIT.md, ASSET_PROVENANCE.md, IMAGE_CREDITS.md and HERO_SOURCES.md. See CHANGELOG.md for the complete changed-file inventory. COURSE_SUBMISSION_CHECKLIST.md is preserved and updated. The authoritative Coursera rubric is absent, so exact compliance must still be checked against the assignment. Do not invent Copilot usage or claim tests/manual checks that were not performed. Nothing has been published or automatically submitted.
+Photographs, product visual provenance and licenses remain documented in IMAGE_AUDIT.md, ASSET_PROVENANCE.md, IMAGE_CREDITS.md and HERO_SOURCES.md. See CHANGELOG.md for the complete changed-file inventory. COURSE_SUBMISSION_CHECKLIST.md is preserved and updated. The authoritative Coursera rubric is absent, so exact compliance must still be checked against the assignment. Document development assistance accurately and do not claim tests or manual checks that were not performed. The source code is published on GitHub; Coursera submission must be completed separately.
 
 ## Comprehensive Playwright Test suite
 

@@ -7,7 +7,7 @@
 - [ ] Review security and describe limitations honestly.
 - [ ] For Parts 2–5, prepare a DOCX/PDF containing the actual relevant code and explanations, as requested by the course.
 - [ ] In final reflection identify three features, challenges, architecture, security and state/performance.
-- [ ] Record any real Microsoft Copilot usage, if applicable.
+- [ ] Record any AI assistance used, as required by the course.
 - [ ] Complete required peer reviews.
 
 ## Redesign verification
