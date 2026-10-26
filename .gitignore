@@ -39,3 +39,10 @@ backups/
 **/TestResults/
 **/coverage/
 *.trx
+
+# Keep only the main README.md on GitHub
+*.md
+!README.md
+
+# Ignore Markdown documentation in subdirectories
+**/*.md

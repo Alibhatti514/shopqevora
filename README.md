@@ -34,7 +34,7 @@ The API's **UserSecretsId is unchanged**. Existing connection string and signing
 
 The database remains `Shop`; the existing database application username is intentionally unchanged. Do not rename tables or Identity records as part of the brand change. Product IDs, names, prices, categories, descriptions and image mappings remain intact. Development demo seeding remains additive/idempotent.
 
-Guest checkout adds one companion table, `GuestCheckouts`, linked to the existing Orders table. Read [DATABASE_UPGRADE.md](DATABASE_UPGRADE.md) for the private backup procedure, schema checks, reviewed SQL, and explicit additive command:
+Guest checkout adds one companion table, `GuestCheckouts`, linked to the existing Orders table. Read the local project documentation for the private backup procedure, schema checks, reviewed SQL, and explicit additive command:
 
 ```bash
 dotnet run --project src/ShopQevora.Api -- --audit-guest-schema
@@ -72,7 +72,7 @@ This is a local demo, not production infrastructure. Production needs HTTPS, bac
 - Intertwined SQ symbols: `wwwroot/monogram.svg`, `monogram-light.svg`.
 - Matching small-size favicon: `wwwroot/favicon.svg`.
 - The custom treatment uses an interwoven S/Q ribbon, carefully tightened outlined lettering and restrained offset vector layers/highlights. It is 3D-inspired vector artwork, not a claimed 3D model. No external fonts or raster images are embedded in the logo.
-- Existing Manrope/Fraunces site typography and color tokens remain. See [BRAND_AND_MOTION.md](BRAND_AND_MOTION.md).
+- Existing Manrope/Fraunces site typography and color tokens remain.
 - `scroll-motion.js` progressively enhances existing section/category/editorial/footer headings, cards and images via IntersectionObserver. Selected short text uses Blazor-rendered word/character spans with full screen-reader text.
 - Reveals reset only after fully leaving the viewport, then replay with the new scroll direction. Partially visible text is not erased. Short staggered captions complete quickly; essential prices/checkout instructions are not typed.
 - Default content is visible when JS fails. Reduced motion displays all content without transitions. MutationObserver handles Blazor route/data updates; disposal removes observers, listeners and pending animation frames. Hero slides are excluded and keep their existing timing.
@@ -106,9 +106,7 @@ bash scripts/smoke.sh
 
 The .NET and Node suites do not require MySQL: EF InMemory and an ASP.NET TestServer are used only inside tests. The application continues using MySQL. TestServer transaction warnings are suppressed for the fake provider; these tests do not establish real MySQL concurrency/transaction behavior. Smoke checks need the API/MySQL. Test credentials/signing material are generated at runtime and do not replace application secrets.
 
-Coverage includes original commerce behavior, guest storage/quantities/removal, success/failure cart clearing, required-field/product/quantity validation, server prices, retry conflicts, anonymous-order privacy, protected endpoints, old JWT compatibility, account registration/login/checkout/history, merge retries and rate limiting. JavaScript tests cover carousel lifecycle plus scroll initialization, cleanup, remounting, reverse scrolling, reduced motion and hero exclusion.
-
-See [VERIFICATION.md](VERIFICATION.md) for exact executed results. Current Playwright screenshots and the HTML report are generated under ignored `test-output/`; reproducible TypeScript tooling is in the repository. Browser automation runs actual API/client instances on 5101/5174 while normal startup remains 5100/5173. Earlier Chrome smoke artifacts remain under `output/browser-qa` and `tests/browser` for historical reference.
+Coverage includes original commerce behavior, guest storage/quantities/removal, success/failure cart clearing, required-field/product/quantity validation, server prices, retry conflicts, anonymous-order privacy, protected endpoints, old JWT compatibility, account registration/login/checkout/history, merge retries and rate limiting. JavaScript tests cover carousel lifecycle plus scroll initialization, cleanup, remounting, reverse scrolling, reduced motion and hero exclusion. Current Playwright screenshots and the HTML report are generated under ignored `test-output/`; reproducible TypeScript tooling is in the repository. Browser automation runs actual API/client instances on 5101/5174 while normal startup remains 5100/5173. Earlier Chrome smoke artifacts remain under `output/browser-qa` and `tests/browser` for historical reference.
 
 ## Manual review and screenshots
 
@@ -124,13 +122,13 @@ See [VERIFICATION.md](VERIFICATION.md) for exact executed results. Current Playw
 
 ## Troubleshooting and submission
 
-Port already used: stop the older processes before starting the renamed projects. Missing secrets: use the API's unchanged UserSecretsId privately. Missing guest schema: follow DATABASE_UPGRADE.md rather than resetting MySQL. Unavailable database: check native service, port 3306 and existing account grants. Expired sessions: sign in again. Guest reference/confirmation unavailable after refresh: intentional memory-only UI; no public lookup exists. Browser storage disabled: guest persistence cannot work reliably; the UI reports errors.
+Port already used: stop the older processes before starting the renamed projects. Missing secrets: use the API's unchanged UserSecretsId privately. Missing guest schema: follow the local project documentation rather than resetting MySQL. Unavailable database: check native service, port 3306 and existing account grants. Expired sessions: sign in again. Guest reference/confirmation unavailable after refresh: intentional memory-only UI; no public lookup exists. Browser storage disabled: guest persistence cannot work reliably; the UI reports errors.
 
-Photographs, product visual provenance and licenses remain documented in IMAGE_AUDIT.md, ASSET_PROVENANCE.md, IMAGE_CREDITS.md and HERO_SOURCES.md. See CHANGELOG.md for the complete changed-file inventory. COURSE_SUBMISSION_CHECKLIST.md is preserved and updated. The authoritative Coursera rubric is absent, so exact compliance must still be checked against the assignment. Document development assistance accurately and do not claim tests or manual checks that were not performed. The source code is published on GitHub; Coursera submission must be completed separately.
+Product visuals are illustrative demo assets, including AI-generated images. The source code is published on GitHub. Coursera submission must be completed separately, following the assignment requirements.
 
 ## Comprehensive Playwright Test suite
 
-Part 9 adds `playwright.config.ts`, TypeScript specifications under `e2e`, axe-core, three browser engines, fourteen viewport sizes and representative touch projects. The suite starts separate real application instances at 5101/5174 and uses safely run-scoped MySQL fixtures with guarded cleanup. See [E2E_TESTING.md](E2E_TESTING.md) for exact setup, data isolation, browser installation, output locations and commands. No existing customer data is used for test logins or deleted during cleanup.
+Part 9 adds `playwright.config.ts`, TypeScript specifications under `e2e`, axe-core, three browser engines, fourteen viewport sizes and representative touch projects. The suite starts separate real application instances at 5101/5174 and uses safely run-scoped MySQL fixtures with guarded cleanup. No existing customer data is used for test logins or deleted during cleanup.
 
 ## Professional account and catalog enhancement (26 October 2026)
 
@@ -189,15 +187,13 @@ npm run typecheck
 npx playwright test
 ```
 
-See [VERIFICATION.md](VERIFICATION.md) for actual executed results and limitations.
-
-Final enhancement verification: **64 xUnit tests, 11 JavaScript tests and 184 Playwright tests passed**, with zero failures/skips; TypeScript and restore/build passed (0 build warnings/errors). Chromium, Firefox, WebKit and representative touch contexts exercised 14 requested dimensions. See [the delivery report](ENHANCEMENT_REPORT.md) for file changes, final menu/profile screenshots, database safety and limitations. The full Playwright report is generated locally under `test-output/report/`.
+Final enhancement verification: **64 xUnit tests, 11 JavaScript tests and 184 Playwright tests passed**, with zero failures/skips; TypeScript and restore/build passed (0 build warnings/errors). Chromium, Firefox, WebKit and representative touch contexts exercised 14 requested dimensions. The full Playwright report is generated locally under `test-output/report/`.
 
 ## Contact Us
 
 A functional, responsive Contact Us page is available at `/contact`, **Help & Support → Contact Us**, and the footer. The previous `/information/contact` URL remains valid. Guests and signed-in customers can submit validated inquiries with optional international phone/order reference. Inquiries are stored privately in MySQL; signed form tokens, a honeypot, input/body limits, per-IP rate limiting and idempotent retries protect the endpoint. There is no public inquiry lookup.
 
-**Demo inbox: not actively monitored; no emails are sent or response time promised.** FAQs describe actual demo checkout/shipping/refund behavior without invented business policies. See [CONTACT.md](CONTACT.md) for architecture, limits, data handling, source files and manual review.
+**Demo inbox: not actively monitored; no emails are sent or response time promised.** FAQs describe actual demo checkout/shipping/refund behavior without invented business policies.
 
 Existing databases require the explicit backed-up additive upgrade (already applied locally):
 
@@ -207,4 +203,4 @@ dotnet run --project tools/ShopQevora.E2E -- upgrade-contact
 
 This creates only `ContactInquiries`, after a private full backup; existing customer/product/cart/order records remain unchanged. It is not an EnsureCreated migration. Restart existing API/client processes to load the new routes and hard-refresh the frontend. Normal ports stay 5100/5173.
 
-Contact Us final verification: **77 xUnit tests, 11 JavaScript tests and 209 Playwright tests passed**, with zero failures/skips; TypeScript and restore/build passed (0 build warnings/errors). Chromium, Firefox, WebKit and both touch projects passed, including the new page at all 14 responsive sizes. [Contact implementation, screenshots and manual checklist](CONTACT.md) · [Exact verification results](VERIFICATION.md).
+Contact Us final verification: **77 xUnit tests, 11 JavaScript tests and 209 Playwright tests passed**, with zero failures/skips; TypeScript and restore/build passed (0 build warnings/errors). Chromium, Firefox, WebKit and both touch projects passed, including the new page at all 14 responsive sizes.
