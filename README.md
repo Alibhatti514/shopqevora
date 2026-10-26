@@ -4,7 +4,7 @@ A premium .NET 8 Blazor WebAssembly e-commerce capstone backed by ASP.NET Core, 
 
 **Demo checkout only: no payment, cash collection, shipping or fulfillment.** No card numbers or payment credentials are collected.
 
-Repository slug for a future hosted repository: `shopqevora`. This workspace currently has no `.git` directory or configured remote; nothing was published or submitted.
+Repository slug for a future hosted repository: `shopqevora`. Source code is published on GitHub under `Alibhatti514/shopqevora`. The project is available for review and local setup.
 
 ## Run locally
 
